@@ -16,6 +16,31 @@
             /* IE6, IE7 */
             clip: rect(1px, 1px, 1px, 1px);
         }
+        #slideshow {
+            position: relative;
+            
+            width: 33%;
+        }
+        #ss_pause, #ss_prev, #ss_next {
+            position: absolute;
+        }
+        #ss_pause {
+            top: 100%;
+            left: 0;
+        }
+        #ss_prev {
+            top: 50%;
+            left: 0;
+        }
+        #ss_next {
+            top: 50%;
+            right: 0;
+        }
+        img {
+            max-width: 100%;
+            width: 100%;
+        }
+
     </style>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript">
