@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <title>Slideshow</title>
     <style type="text/css">
+        body {
+            font: 100%/1.5 sans-serif;
+        }
         .element-a11y {
             position: absolute !important;
             height: 1px;
@@ -14,7 +17,7 @@
             clip: rect(1px, 1px, 1px, 1px);
         }
     </style>
-    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript">
         function SlideShowMessage(msg) {
             $("#slideShowMessage").text(msg);
@@ -114,10 +117,10 @@
         <button id="ss_pause">Pause slides</button>
         <button id="ss_prev">Previous slide</button>
         <button id="ss_next">Next slide</button>
-        <a href="#">Slide 1</a>
-        <a href="#">Slide 2</a>
-        <a href="#">Slide 3</a>
-        <a href="#">Slide 4</a>
+        <a href="#"><img src="http://placehold.it/350x150/007cb6/ffffff/?text=slide one" alt="slide one"></a>
+        <a href="#"><img src="http://placehold.it/350x150/534741/ffffff/?text=slide two" alt="slide two"></a>
+        <a href="#"><img src="http://placehold.it/350x150/672B35/ffffff/?text=slide three" alt="slide three"></a>
+        <a href="#"><img src="http://placehold.it/350x150/392F2B/ffffff/?text=slide four" alt="slide four"></a>
     </div>
 </body>
 
