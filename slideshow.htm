@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Slideshow</title>
+    <style type="text/css">
+        .element-a11y {
+            position: absolute !important;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+            clip: rect(1px 1px 1px 1px);
+            /* IE6, IE7 */
+            clip: rect(1px, 1px, 1px, 1px);
+        }
+    </style>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript">
+        function SlideShowMessage(msg) {
+            $("#slideShowMessage").text(msg);
+
+            //Make the message disappear in 3 seconds
+            setTimeout(function() {
+                $("#slideShowMessage").text("");
+            }, 3000);
+
+            //Hack to make the alert be spoken in IE
+            $("#slideShowMessage").css("visibility", "hidden");
+            $("#slideShowMessage").css("visibility", "visible");
+        } //function SlideShowMessage
+
+        function ShowSlide(direction, auto) {
+            var currentSlide = $("#slideshow").children("a:visible").first();
+
+            //If the slide has hover or focus don't move it
+            //unless the Prev or Next button is pressed
+            if (!(auto == true && ($(currentSlide).is(":focus") || $(currentSlide).is(":hover")))) {
+                var newSlide = "";
+
+                if (direction == 0) { //left
+                    if ($(currentSlide).is("a:first")) {
+                        newSlide = $(currentSlide).siblings("a").last();
+                    } else {
+                        newSlide = $(currentSlide).prev("a");
+                    } //if-else
+                } else { //direction = right
+                    if ($(currentSlide).is("a:last")) {
+                        newSlide = $(currentSlide).siblings("a").first();
+                    } else {
+                        newSlide = $(currentSlide).next("a");
+                    } //if-else
+                } //if-else
+
+                if (typeof newSlide === "object") {
+                    $(newSlide).show();
+                    $(newSlide).attr("tabindex", "0");
+                    $(newSlide).removeAttr("aria-hidden");
+
+                    $(currentSlide).hide();
+                    $(currentSlide).removeAttr("tabindex");
+                    $(currentSlide).attr("aria-hidden", "true");
+                } //if
+            } //if
+        } //function ShowSlide
+
+        $(function() {
+            //Hide all inactive links
+            $("#slideshow").children("a").hide();
+            $("#slideshow").children("a").attr("aria-hidden", "true");
+
+            //Show the first slide
+            $("#slideshow").children("a:first").show();
+            $("#slideshow").children("a:first").removeAttr("aria-hidden");
+
+            //Add the description "slide show" to all elements
+            $("#slideshow").children().attr("aria-describedby", "slideShowHeading");
+
+            //Start the slider moving
+            var slideMover = setInterval(function() {
+                ShowSlide(1, true)
+            }, 3000);
+
+            $("#ss_pause").on("click", function(ev) {
+                if (slideMover != "") { //slides are playing
+                    clearInterval(slideMover);
+                    slideMover = "";
+                    $("#ss_pause").text("Play slides");
+                } else { //if slides are paused
+                    ShowSlide(1, true);
+                    slideMover = setInterval(function() {
+                        ShowSlide(1, true)
+                    }, 3000);
+                    $("#ss_pause").text("Pause slides");
+                } //if-else
+            });
+
+            $("#ss_prev").on("click", function(ev) {
+                ShowSlide(0, false);
+                SlideShowMessage("Showing previous slide");
+            });
+
+            $("#ss_next").on("click", function(ev) {
+                ShowSlide(1, false);
+                SlideShowMessage("Showing next slide");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1 id="slideShowHeading">Latest news slideshow</h1>
+    <div class="a11y" id="slideShowMessage" role="alert"></div>
+    <div id="slideshow">
+        <button id="ss_pause">Pause slides</button>
+        <button id="ss_prev">Previous slide</button>
+        <button id="ss_next">Next slide</button>
+        <a href="#">Slide 1</a>
+        <a href="#">Slide 2</a>
+        <a href="#">Slide 3</a>
+        <a href="#">Slide 4</a>
+    </div>
+</body>
+
+</html>
