@@ -25,8 +25,8 @@
             position: absolute;
         }
         #ss_pause {
-            top: 100%;
-            left: 0;
+            top: 15px;
+            left: 15px;
         }
         #ss_prev {
             top: 50%;
@@ -39,6 +39,17 @@
         img {
             max-width: 100%;
             width: 100%;
+        }
+        .direction {
+            background: #fff;
+            border-width: 0;
+            padding: 1em;
+            display: block;
+            -webkit-transition: padding .5s;
+            transition: padding .5s;
+        }
+        .direction:hover, .direction:focus {
+            padding: 1em 3em;
         }
 
     </style>
@@ -140,8 +151,12 @@
     <div class="a11y" id="slideShowMessage" role="alert"></div>
     <div id="slideshow">
         <button id="ss_pause">Pause slides</button>
-        <button id="ss_prev">Previous slide</button>
-        <button id="ss_next">Next slide</button>
+        <button id="ss_prev" class="direction">
+            <img src="img/chevron-left.png" alt="previous slide">
+        </button>
+        <button id="ss_next" class="direction">
+            <img src="img/chevron-right.png" alt="next slide">
+        </button>
         <a href="#"><img src="http://placehold.it/800x400/007cb6/ffffff/?text=slide one" alt="slide one"></a>
         <a href="#"><img src="http://placehold.it/800x400/534741/ffffff/?text=slide two" alt="slide two"></a>
         <a href="#"><img src="http://placehold.it/800x400/672B35/ffffff/?text=slide three" alt="slide three"></a>
